@@ -70,9 +70,6 @@ set nobackup
 set nowb
 set noswapfile
 
-" Show line numbers.
-set number
-
 " When using the >> or << commands, shift lines by 4 spaces.
 set shiftwidth=4
 
@@ -91,6 +88,9 @@ set si  " Smart Indent
 
 " Wrap lines.
 set wrap
+
+" Show line numbers.
+set number
 
 " Specify location of ctags.
 set tags=~/.tags
@@ -134,8 +134,20 @@ if exists('$TMUX')
     endif
 endif
 
-" Navigating tabs.
-map <C-t> :tabe 
-map <C-w> :tabc<cr>
-map <leader><Left> :tabp<cr>
-map <leader><Right> :tabn<cr>
+" Navigation.
+" These are all meant to match tmux, but with ctrl-w instead
+" of ctrl-a as the prefix.
+
+" Tabs.
+map <C-w>c :Texplore<cr>
+map <C-w>w :tabc<cr>
+map <C-w>p :tabp<cr>
+map <C-w>n :tabn<cr>
+
+" Windows.
+map <C-w>- :Sexplore<cr>
+map <C-w>\ :Vexplore<cr>
+map <C-w>x <C-w>q
+
+" Open definition in new tab
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
